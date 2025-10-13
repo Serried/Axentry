@@ -1,0 +1,14 @@
+node_modules/
+package-lock.json
+
+dist/
+build/
+
+.vscode/
+.idea/
+.DS_Store
+
+*.log
+npm-debug.log*
+
+*.ino.bak
