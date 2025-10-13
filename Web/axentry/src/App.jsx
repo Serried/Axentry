@@ -6,24 +6,44 @@ function App() {
   const [isOtpGenerated, setIsOtpGenerated] = useState(false)
   const [timeLeft, setTimeLeft] = useState(0)
 
-  const generateOTP = () => {
-    const newOtp = Math.floor(100000 + Math.random() * 900000).toString()
-    setOtp(newOtp)
-    setIsOtpGenerated(true)
-    setTimeLeft(300) // 5 minutes 
-    
-    // countdown 
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timer)
-          setIsOtpGenerated(false)
-          setOtp('')
-          return 0
-        }
-        return prev - 1
+  const generateOTP = async () => {
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+      const response = await fetch(`${apiUrl}/api/otp/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-    }, 1000)
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        setOtp(data.otp)
+        setIsOtpGenerated(true)
+        setTimeLeft(data.expiresIn)
+        
+        // countdown
+        const timer = setInterval(() => {
+          setTimeLeft(prev => {
+            if (prev <= 1) {
+              clearInterval(timer)
+              setIsOtpGenerated(false)
+              setOtp('')
+              return 0
+            }
+            return prev - 1
+          })
+        }, 1000)
+        
+        console.log('OTP generated and sent to Arduino:', data.otp)
+      } else {
+        alert('Failed to generate OTP')
+      }
+    } catch (error) {
+      console.error('Error generating OTP:', error)
+      alert('Error connecting to server')
+    }
   }
 
   const copyOTP = async () => {
