@@ -1,6 +1,47 @@
 import './App.css'
+import { useState } from 'react'
 
 function App() {
+  const [otp, setOtp] = useState('')
+  const [isOtpGenerated, setIsOtpGenerated] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(0)
+
+  const generateOTP = () => {
+    const newOtp = Math.floor(100000 + Math.random() * 900000).toString()
+    setOtp(newOtp)
+    setIsOtpGenerated(true)
+    setTimeLeft(300) // 5 minutes 
+    
+    // countdown 
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timer)
+          setIsOtpGenerated(false)
+          setOtp('')
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+  }
+
+  const copyOTP = async () => {
+    try {
+      await navigator.clipboard.writeText(otp)
+      alert('OTP copied to clipboard!')
+    } catch (err) {
+      console.error('Failed to copy OTP:', err)
+      alert('Failed to copy OTP')
+    }
+  }
+
+  // time format
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
   return (
     <div className="app">
       <div className="mobile-frame">
@@ -29,32 +70,43 @@ function App() {
               </p>
             </div>
 
-            <button className="generate-btn">
+            <button className="generate-btn" onClick={generateOTP}>
               <span className="btn-icon">⚡</span>
               Generate OTP
             </button>
           </div>
 
           <div className="otp-display">
-            <div className="otp-placeholder">
-              <div className="otp-dots">
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
+            {isOtpGenerated ? (
+              <div className="otp-generated">
+                <div className="otp-number">{otp}</div>
+                <p className="otp-timer">⏰ Expires in: {formatTime(timeLeft)}</p>
               </div>
-              <p className="otp-text">Your OTP will appear here</p>
-            </div>
+            ) : (
+              <div className="otp-placeholder">
+                <div className="otp-dots">
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                </div>
+                <p className="otp-text">Your OTP will appear here</p>
+              </div>
+            )}
           </div>
 
           <div className="action-buttons">
-            <button className="secondary-btn">
+            <button 
+              className="secondary-btn" 
+              onClick={copyOTP}
+              disabled={!isOtpGenerated}
+            >
               <span className="btn-icon">📋</span>
               Copy OTP
             </button>
-            <button className="secondary-btn">
+            <button className="secondary-btn" disabled>
               <span className="btn-icon">📧</span>
               Send via Email
             </button>
