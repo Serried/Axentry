@@ -1,6 +1,7 @@
 import './App.css'
 
 function App() {
+  // Trigger deployment
   return (
     <div className="app">
       <div className="hero-image-section">
