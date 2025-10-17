@@ -1,13 +1,19 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 function App() {
   const [otp, setOtp] = useState('')
   const [isOtpGenerated, setIsOtpGenerated] = useState(false)
   const [timeLeft, setTimeLeft] = useState(0)
+  const timerRef = useRef(null)
 
   const generateOTP = async () => {
     try {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
       const response = await fetch(`${apiUrl}/api/otp/generate`, {
         method: 'POST',
@@ -24,10 +30,11 @@ function App() {
         setTimeLeft(data.expiresIn)
         
         // countdown
-        const timer = setInterval(() => {
+        timerRef.current = setInterval(() => {
           setTimeLeft(prev => {
             if (prev <= 1) {
-              clearInterval(timer)
+              clearInterval(timerRef.current)
+              timerRef.current = null
               setIsOtpGenerated(false)
               setOtp('')
               return 0
