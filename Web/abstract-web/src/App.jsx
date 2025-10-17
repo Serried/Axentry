@@ -30,6 +30,96 @@ function App() {
             </p>
           </div>
 
+          <div className="team-section">
+            <h2 className="team-title">Contributors</h2>
+            <div className="members-grid">
+              <div className="member-card">
+                <div className="member-image">
+                  <img 
+                    src="./team-members/member1.jpg" 
+                    alt="member-1"
+                    className="member-photo"
+                    onLoad={() => console.log('Image 1 loaded successfully')}
+                    onError={(e) => {
+                      console.log('Image 1 failed to load:', e.target.src);
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="member-image-placeholder" style={{display: 'none'}}>
+                    <span className="member-initial">1</span>
+                  </div>
+                </div>
+                <div className="member-info">
+                  <h3 className="member-name">นายธนกฤต อินทร์ฉ่ำ</h3>
+                  <p className="member-id">รหัสนักศึกษา: 67070061</p>
+                </div>
+              </div>
+
+              <div className="member-card">
+                <div className="member-image">
+                  <img 
+                    src="./team-members/member2.jpg" 
+                    alt="member-2"
+                    className="member-photo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="member-image-placeholder" style={{display: 'none'}}>
+                    <span className="member-initial">2</span>
+                  </div>
+                </div>
+                <div className="member-info">
+                  <h3 className="member-name">นายธิติพัทธ์ นนทเภท</h3>
+                  <p className="member-id">รหัสนักศึกษา: 67070078</p>
+                </div>
+              </div>
+
+              <div className="member-card">
+                <div className="member-image">
+                  <img 
+                    src="./team-members/member3.jpg" 
+                    alt="member-3"
+                    className="member-photo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="member-image-placeholder" style={{display: 'none'}}>
+                    <span className="member-initial">3</span>
+                  </div>
+                </div>
+                <div className="member-info">
+                  <h3 className="member-name">นายเนติ วัชรภูมิ</h3>
+                  <p className="member-id">รหัสนักศึกษา: 67070093</p>
+                </div>
+              </div>
+
+              <div className="member-card">
+                <div className="member-image">
+                  <img 
+                    src="./team-members/member4.jpg" 
+                    alt="member-4"
+                    className="member-photo"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="member-image-placeholder" style={{display: 'none'}}>
+                    <span className="member-initial">4</span>
+                  </div>
+                </div>
+                <div className="member-info">
+                  <h3 className="member-name">นายรัตนกร ชุ่มภักดี</h3>
+                  <p className="member-id">รหัสนักศึกษา: 67070153</p>
+                </div>
+              </div>
+            </div>
+          </div>
           
         </main>
 
