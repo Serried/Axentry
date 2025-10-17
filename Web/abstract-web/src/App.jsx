@@ -30,6 +30,63 @@ function App() {
             </p>
           </div>
 
+          <div className="resources-section">
+            <h2 className="resources-title">Project Resources</h2>
+            <div className="resources-grid">
+              <div className="resource-card">
+                <div className="resource-icon">
+                  <span className="icon">📺</span>
+                </div>
+                <div className="resource-content">
+                  <h3 className="resource-title">Youtube Presentation</h3>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="resource-btn youtube-btn">
+                    <span className="btn-icon">▶️</span>
+                    Watch Video
+                  </a>
+                </div>
+              </div>
+
+              <div className="resource-card">
+                <div className="resource-icon">
+                  <span className="icon">🌐</span>
+                </div>
+                <div className="resource-content">
+                  <h3 className="resource-title">Project Website</h3>
+                  <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer" className="resource-btn website-btn">
+                    <span className="btn-icon">🔗</span>
+                    Visit Website
+                  </a>
+                </div>
+              </div>
+
+              <div className="resource-card">
+                <div className="resource-icon">
+                  <span className="icon">💻</span>
+                </div>
+                <div className="resource-content">
+                  <h3 className="resource-title">Source Code</h3>
+                  <a href="https://github.com/Serried/Axentry" target="_blank" rel="noopener noreferrer" className="resource-btn code-btn">
+                    <span className="btn-icon">📂</span>
+                    View on GitHub
+                  </a>
+                </div>
+              </div>
+
+              <div className="resource-card">
+                <div className="resource-icon">
+                  <span className="icon">📄</span>
+                </div>
+                <div className="resource-content">
+                  <h3 className="resource-title">Project Poster</h3>
+                  <a href="#" className="resource-btn poster-btn">
+                    <span className="btn-icon">📥</span>
+                    Download PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="team-section">
             <h2 className="team-title">Contributors</h2>
             <div className="members-grid">
