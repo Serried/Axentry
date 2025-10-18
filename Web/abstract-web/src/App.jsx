@@ -1,4 +1,5 @@
 import './App.css'
+import './animations.js'
 
 function App() {
   // Trigger deployment
