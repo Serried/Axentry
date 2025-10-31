@@ -53,7 +53,7 @@ function App() {
                 </div>
                 <div className="resource-content">
                   <h3 className="resource-title">Project Website</h3>
-                  <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer" className="resource-btn website-btn">
+                  <a href="https://axentry.vercel.app/" target="_blank" rel="noopener noreferrer" className="resource-btn website-btn">
                     <span className="btn-icon">🔗</span>
                     Visit Website
                   </a>
