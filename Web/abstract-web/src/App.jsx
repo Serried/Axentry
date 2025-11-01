@@ -3,19 +3,33 @@ import './animations.js'
 
 function App() {
   // Trigger deployment
+  const handleDownloadPoster = (e) => {
+    e.preventDefault()
+    const baseUrl = import.meta.env.BASE_URL || '/'
+    const link = document.createElement('a')
+    link.href = `${baseUrl}axentry-poster.pdf`
+    link.download = 'axentry-poster.pdf'
+    link.type = 'application/pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const baseUrl = import.meta.env.BASE_URL || '/'
+  
   return (
     <div className="app">
       <div className="hero-image-section">
-        <div className="hero-image-placeholder">
-          <div className="placeholder-content">
-            <p className="placeholder-text">Image</p>
-          </div>
+        <div className="hero-image-container">
+          <img 
+            src={`${baseUrl}project-image.jpg`} 
+            alt="Axentry Project"
+            className="hero-image"
+          />
         </div>
       </div>
 
-
-
-        <main className="main">
+      <main className="main">
           <div className="hero-section">
             <h1 className="hero-title">
               
@@ -164,7 +178,7 @@ function App() {
                 </div>
                 <div className="resource-content">
                   <h3 className="resource-title">Youtube Presentation</h3>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="resource-btn youtube-btn">
+                  <a href="https://youtu.be/gSPfIFu5Ml4" target="_blank" rel="noopener noreferrer" className="resource-btn youtube-btn">
                     <span className="btn-icon">▶️</span>
                     Watch Video
                   </a>
@@ -203,7 +217,7 @@ function App() {
                 </div>
                 <div className="resource-content">
                   <h3 className="resource-title">Project Poster</h3>
-                  <a href="#" className="resource-btn poster-btn">
+                  <a href="/axentry-poster.pdf" onClick={handleDownloadPoster} className="resource-btn poster-btn">
                     <span className="btn-icon">📥</span>
                     Download PDF
                   </a>
