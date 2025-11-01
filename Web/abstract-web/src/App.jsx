@@ -37,7 +37,7 @@ function App() {
             </h1>
             <p className="hero-subtitle">
             โครงงานนี้จัดทำขึ้นภายใต้รายวิชา Physical Computing (06016409) โดยมีวัตถุประสงค์เพื่อพัฒนาระบบควบคุมการเข้า-ออกหอพักที่มีความยืดหยุ่น ปลอดภัย และสะดวกต่อการใช้งานของผู้พักอาศัย ระบบถูกออกแบบมาเพื่อแก้ไขปัญหาที่พบได้บ่อย เช่น การลืม Keycard การเพิ่มภาระงานให้เจ้าหน้าที่หอพัก รวมถึงความไม่สะดวกในการรับแขกหรือผู้มาเยี่ยมระบบนี้ประกอบด้วย สองวิธีหลักในการเข้าถึงหอพัก ได้แก่
-<br></br><br></br>1. การใช้ Keycard (NFC) สำหรับการเข้าออกแบบมาตรฐานทั่วไปของผู้พักอาศัย
+<br></br><br></br>1. การใช้ Keycard (RFID) สำหรับการเข้าออกแบบมาตรฐานทั่วไปของผู้พักอาศัย
 <br></br>2. การใช้รหัส OTP ผ่านเว็บไซต์ โดยผู้พักสามารถเข้าสู่ระบบเพื่อสร้างรหัสแบบใช้ครั้งเดียว (One-Time Password) สำหรับกรณีลืม Keycard หรือใช้เพื่อมอบสิทธิ์ให้แขกเข้ามาได้ชั่วคราวโดยไม่ต้องออกมาเปิดประตูด้วยตนเอง
 <br></br><br></br>โครงงานนี้ผสานเทคโนโลยีทางด้าน Physical Computing และ Web Application เข้าด้วยกัน เพื่อสร้างระบบที่ตอบโจทย์ชีวิตประจำวันในยุคดิจิทัล ช่วยลดภาระงานของเจ้าหน้าที่ และเพิ่มความสะดวก ปลอดภัย รวมถึงยกระดับประสบการณ์การพักอาศัยให้มีประสิทธิภาพมากยิ่งขึ้น
 
@@ -248,6 +248,7 @@ function App() {
                 </div>
                 <div className="member-info">
                   <h3 className="member-name">นายธนกฤต อินทร์ฉ่ำ</h3>
+                  <p className="member-role">Fullstack Developer</p>
                   <p className="member-id">รหัสนักศึกษา: 67070061</p>
                 </div>
               </div>
@@ -269,6 +270,7 @@ function App() {
                 </div>
                 <div className="member-info">
                   <h3 className="member-name">นายธิติพัทธ์ นนทเภท</h3>
+                  <p className="member-role">Tester</p>
                   <p className="member-id">รหัสนักศึกษา: 67070078</p>
                 </div>
               </div>
@@ -290,6 +292,7 @@ function App() {
                 </div>
                 <div className="member-info">
                   <h3 className="member-name">นายเนติ วัชรภูมิ</h3>
+                  <p className="member-role">Hardware Engineer</p>
                   <p className="member-id">รหัสนักศึกษา: 67070093</p>
                 </div>
               </div>
@@ -311,8 +314,64 @@ function App() {
                 </div>
                 <div className="member-info">
                   <h3 className="member-name">นายรัตนกร ชุ่มภักดี</h3>
+                  <p className="member-role">Tester</p>
                   <p className="member-id">รหัสนักศึกษา: 67070153</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Devlog Section */}
+          <div className="devlog-section">
+            <h2 className="section-title">Devlog</h2>
+            <div className="devlog-content">
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Getting Started</h3>
+                <p className="devlog-topic-description">
+                  เราเริ่มต้นจากการทดลองเชื่อมต่ออุปกรณ์หลักทั้งหมดเข้ากับบอร์ด Arduino เพื่อทดสอบว่าของที่สั่งมามีปัญหาอะไรไหม จากนั้นได้มีการพัฒนาฝั่ง Backend ด้วย Node.js (Express) เพื่อเป็น server กลางในการจัดการรหัส OTP และ Frontend ด้วย React.js <br></br><br></br>การสื่อสารระหว่าง Arduino และ server ใช้ HTTP Protocol โดย Arduino ส่ง request ไปยัง API เพื่อดึงและตรวจสอบรหัส OTP แบบ real-time ผ่าน Wi-Fi
+                </p>
+              </div>
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Development</h3>
+                <p className="devlog-topic-description">
+                  1. RFID Authentication - เราได้มีการเขียนโค้ดให้ Arduino อ่าน UID ของบัตรผ่าน RC522 และตรวจสอบกับ whitelist ที่กำหนดไว้ในโค้ด <br></br>2. OTP Authentication - backend มีการสร้างรหัสแบบ 6 หลักมีอายุ 5 นาที และ generate จาก frontend ที่ติดต่อกับ API<br></br>3. OTP Retrieval - Arduino มีการดึง OTP ผ่าน API ทุก ๆ 5 วินาที เมื่อผู้ใช้กรอกรหัส OTP แล้วกด '#' ระบบจะตรวจสอบ OTP ที่ดึงมา<br></br>4. Auto-lock - หลังจากประตูปลดล็อก ระบบจะรอ 5 วินาทีเพื่อให้ผู้ใช้ผ่านเข้าไปก่อนที่ Servo จะหมุนกลับมาล็อกประตูอีกครั้งโดยอัตโนมัติ
+                </p>
+              </div>
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Technical Difficulties</h3>
+                <p className="devlog-topic-description">
+                  1. อุปกรณ์หลักพัง - ขนส่งไทยไม่ระวังของ ทำให้ของที่สั่งมาส่วนใหญ่ใช้ไม่ได้ หรืออยู่ในสภาพไม่พร้อมใช้ ทำให้ต้องไปซื้อกับร้านที่อยู่แถวสถาบันอยู่หลายรอบ<br></br>
+                  2. Wi-Fi ต่อได้แต่ IP = 0.0.0.0 - ตอนแรก Arduino R4 WiFi ต่อ SSID ได้ แต่ไม่ได้รับ DHCP IP แก้ได้โดยการเปลี่ยนมาใช้ Hotspot จากมือถือ คาดว่าสาเหตุน่าจะมาจากตอนแรกใช้เครื่องที่ Host ต่อกับ Captive Portal ของคณะ<br></br>
+                  3. Arduino connect กับ backend ไม่ได้ - สาเหตุเกิดมากจากใช้ localhost ใน Arduino ทำให้ Arduino มองว่า localhost คือตัวมันเอง ไม่ใช่เครื่อง server / แก้ได้โดยเปลี่ยน API_HOST เป็น IP ของเครื่อง server และแก้โค้ดใน Backend<br></br>
+                  4. Wiring ผิด - ปัญหาที่เจอบ่อย ๆ อยู่กับ Keypad ซึ่งกดปุ่มแล้วได้ค่าไม่ตรง เลยมีการแก้ส่วนที่เป็น Mapping อยู่นานแล้วมาเจอทีหลังว่าต่อสายผิด ซึ่งปัญหานี้แบบนี้เป็นบ่อยมากกับหลายอุปกรณ์
+                </p>
+              </div>
+          
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Current Results</h3>
+                <p className="devlog-topic-description">
+                  1. แตะบัตร RFID เพื่อปลดล็อกประตูได้<br></br>
+                  2. กรอกรหัส OTP ที่สร้างจากเว็บผ่าน Keypad เพื่อปลดล็อกประตูได้<br></br>
+                  3. ระบบตรวจสอบ OTP แบบ real-time ผ่าน HTTP API<br></br>
+                  4. Servo หมุนเปิดประตูและล็อกกลับอัตโนมัติได้<br></br>
+                  5. Frontend ทำงานกับ Backend ได้ผ่าน API
+                </p>
+              </div>
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Incomplete Features / Limitations</h3>
+                <p className="devlog-topic-description">
+                  1. ยังไม่ได้เชื่อมต่อกับฐานข้อมูลจริง ตอนนี้เก็บในไฟล์<br></br>
+                  2. ระบบยังไม่สามารถบันทึกประวัติการเข้า–ออกได้<br></br>
+                  3. ยังไม่มีระบบการจัดการผู้ใช้หลายระดับ (Admin/Resident)<br></br>
+                  4. OTP ใช้ได้เฉพาะใน LAN เดียวกัน<br></br>
+                  5. ยังไม่ได้ทดสอบการทำงานต่อเนื่องในระยะยาว
+                </p>
+              </div>
+              <div className="devlog-topic">
+                <h3 className="devlog-topic-title">Project Summary (TL;DR)</h3>
+                <p className="devlog-topic-description">
+                  Axentry ยังคงอยู่ในขั้น MVP แต่ระบบสามารถทำงานได้ทั้ง การแตะบัตร RFID และการยืนยันด้วยรหัส OTP ผ่านเว็บพร้อมกลไก Auto-Lock ที่ทำให้ระบบปลอดภัยและใกล้เคียงของจริงมากขึ้น
+                </p>
               </div>
             </div>
           </div>

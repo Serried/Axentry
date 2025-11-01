@@ -782,6 +782,52 @@ body {
   line-height: 1.7;
 }
 
+/* Devlog Section */
+.devlog-section {
+  padding: 80px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.devlog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.devlog-topic {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.devlog-topic:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-5px);
+}
+
+.devlog-topic-title {
+  font-size: 1.8rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.devlog-topic-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  text-align: justify;
+}
+
 .resources-section {
   padding: 80px 0;
   text-align: center;
@@ -1093,6 +1139,14 @@ body {
   color: var(--text-primary);
   margin-bottom: 8px;
   line-height: 1.4;
+}
+
+.member-role {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 8px 0;
+  opacity: 0.9;
 }
 
 .member-id {
